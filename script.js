@@ -25,12 +25,13 @@ function addBookToLibrary(book) {
 function displayLibrary() {
     for (let key in myLibrary) {
         let singleBook = document.createElement("div");
+        singleBook.classList.add("book");
         singleBook.textContent = myLibrary[key].info();
         body.appendChild(singleBook);
     }
 }
 
-for (let i = 1; i < 10; i++) {
+for (let i = 1; i < 30; i++) {
     addBookToLibrary(new Book(`The Hobbit ${i}`, "J.R.R. Tolkien", 290 + i, i % 2 ? true : false));
 }
 
