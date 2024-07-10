@@ -24,10 +24,28 @@ function Book(title, author, pages, read) {
 
 function addBookToLibrary(book) {
     myLibrary.push(book);
+
     let myBook = document.createElement("div");
     myBook.classList.add("book");
     myBook.setAttribute("id", myLibrary.length + 1);
-    myBook.textContent = myLibrary[myLibrary.length - 1].info();
+
+    let bookInfo = document.createElement("div");
+    bookInfo.classList.add("book-info");
+    bookInfo.textContent = myLibrary[myLibrary.length - 1].info();
+    myBook.appendChild(bookInfo);
+
+    let deleteButton = document.createElement("button");
+    deleteButton.classList.add("delete");
+    deleteButton.setAttribute("type", "button");
+    deleteButton.textContent = "Del";
+    myBook.appendChild(deleteButton);
+
+    let toggleButton = document.createElement("button");
+    toggleButton.classList.add("toggle");
+    toggleButton.setAttribute("type", "button");
+    toggleButton.textContent = "Read";
+    myBook.appendChild(toggleButton);
+
     mainbody.appendChild(myBook);
 }
 
