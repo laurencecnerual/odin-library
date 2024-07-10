@@ -9,13 +9,14 @@ let nextID = 0;
 let formHidden = true;
 
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, id) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
+  this.id = id;
   this.info = function() {
-    let bookInfo = `\"${title}\" by ${author}, ${pages} pages, `;
+    let bookInfo = `[${id}] \"${title}\" by ${author}, ${pages} pages, `;
     if (read) {
         bookInfo += "already read"
     } else {
@@ -80,7 +81,7 @@ sideButton.addEventListener("click", () => {
 });
 
 addButton.addEventListener("click", () => {
-    addBookToLibrary(new Book("The Hobbit XYZ", "J.R.R. Tolkien", 2900, false));
+    addBookToLibrary(new Book("The Hobbit XYZ", "J.R.R. Tolkien", 2900, false, nextID));
 });
 
 function removeBookFromLibrary(book) {
@@ -101,8 +102,8 @@ function displayLibrary() {
     }
 }
 
-for (let i = 1; i < 30; i++) {
-    addBookToLibrary(new Book(`The Hobbit ${i}`, "J.R.R. Tolkien", 290 + i, i % 2 ? true : false));
+for (let i = 1; i < 31; i++) {
+    addBookToLibrary(new Book(`The Hobbit ${i}`, "J.R.R. Tolkien", 290 + i, i % 2 ? true : false, nextID));
 }
 
 // for (let key in myLibrary) {
