@@ -3,6 +3,8 @@ const wholepage = document.querySelector("body");
 const sidebar = document.querySelector("aside");
 const mainbody = document.querySelector("main");
 const sideButton = document.querySelector("button.sidebar");
+let nextID = 0;
+let formHidden = true;
 
 
 function Book(title, author, pages, read) {
@@ -27,7 +29,7 @@ function addBookToLibrary(book) {
 
     let myBook = document.createElement("div");
     myBook.classList.add("book");
-    myBook.setAttribute("id", myLibrary.length + 1);
+    myBook.setAttribute("id", nextID++);
 
     let bookInfo = document.createElement("div");
     bookInfo.classList.add("book-info");
@@ -49,9 +51,20 @@ function addBookToLibrary(book) {
     mainbody.appendChild(myBook);
 }
 
+function collapseExpand() {
+    if (formHidden) {
+        wholepage.style.gridTemplateColumns = "1fr 3fr";
+        sideButton.textContent = "-";
+        formHidden = false;
+    } else {
+        wholepage.style.gridTemplateColumns = "1fr 49fr";
+        sideButton.textContent = "+";
+        formHidden = true;
+    }
+}
+
 sideButton.addEventListener("click", () => {
-    addBookToLibrary(new Book(`The Hobbit XYZ`, "J.R.R. Tolkien", 3000, false));
-    console.log(myLibrary);
+    collapseExpand();
 });
 
 function removeBookFromLibrary(book) {
