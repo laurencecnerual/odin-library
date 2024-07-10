@@ -4,6 +4,7 @@ const sidebar = document.querySelector("aside");
 const mainbody = document.querySelector("main");
 const sideButton = document.querySelector("button.sidebar");
 const form = document.querySelector("form");
+const addButton = document.querySelector("button.add-book");
 let nextID = 0;
 let formHidden = true;
 
@@ -64,11 +65,11 @@ function hideForm() {
 
 function collapseExpand() {
     if (formHidden) {
-        wholepage.style.gridTemplateColumns = "1fr 3fr";
+        wholepage.style.gridTemplateColumns = "1fr 4fr";
         sideButton.textContent = "-";
         displayForm();
     } else {
-        wholepage.style.gridTemplateColumns = "1fr 49fr";
+        wholepage.style.gridTemplateColumns = "1fr 99fr";
         sideButton.textContent = "+";
         hideForm();
     }
@@ -76,6 +77,10 @@ function collapseExpand() {
 
 sideButton.addEventListener("click", () => {
     collapseExpand();
+});
+
+addButton.addEventListener("click", () => {
+    addBookToLibrary(new Book("The Hobbit XYZ", "J.R.R. Tolkien", 2900, false));
 });
 
 function removeBookFromLibrary(book) {
