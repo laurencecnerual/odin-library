@@ -3,6 +3,7 @@ const wholepage = document.querySelector("body");
 const sidebar = document.querySelector("aside");
 const mainbody = document.querySelector("main");
 const sideButton = document.querySelector("button.sidebar");
+const form = document.querySelector("form");
 let nextID = 0;
 let formHidden = true;
 
@@ -51,15 +52,25 @@ function addBookToLibrary(book) {
     mainbody.appendChild(myBook);
 }
 
+function displayForm() {
+    form.style.display = "unset";
+    formHidden = false;
+}
+
+function hideForm() {
+    form.style.display = "none";
+    formHidden = true;
+}
+
 function collapseExpand() {
     if (formHidden) {
         wholepage.style.gridTemplateColumns = "1fr 3fr";
         sideButton.textContent = "-";
-        formHidden = false;
+        displayForm();
     } else {
         wholepage.style.gridTemplateColumns = "1fr 49fr";
         sideButton.textContent = "+";
-        formHidden = true;
+        hideForm();
     }
 }
 
