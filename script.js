@@ -16,8 +16,8 @@ function Book(title, author, pages, read, id) {
   this.read = read;
   this.id = id;
   this.info = function() {
-    let bookInfo = `[${id}] \"${title}\" by ${author}, ${pages} pages, `;
-    if (read) {
+    let bookInfo = `[${this.id}] \"${this.title}\" by ${this.author}, ${this.pages} pages, `;
+    if (this.read) {
         bookInfo += "already read"
     } else {
         bookInfo += "not read yet"
@@ -59,7 +59,9 @@ function addBookToLibrary(book) {
     toggleButton.textContent = "Read";
     myBook.appendChild(toggleButton);
     toggleButton.addEventListener("click", (e) => {
-        alert("Tog " + e.target.parentNode.id);
+        let parent = e.target.parentNode;
+        let targetBook = getBookByID(parent.id);
+        toggleReadStatus(targetBook);
     });
 
     mainbody.appendChild(myBook);
@@ -100,7 +102,10 @@ function removeBookFromLibrary(book) {
 }
 
 function toggleReadStatus(book) {
-    book.read *= !book.read;
+    let oldInfo = book.info();
+    book.read = !book.read;
+    let newInfo = book.info();
+    alert (`Read status updated.\nBefore: ${oldInfo}\nAfter:    ${newInfo}`);
 }
 
 function getBookByID(targetID) {
