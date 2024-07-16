@@ -12,11 +12,11 @@
         <button type="button" class="sidebar">+</button>
         <form action="">
             <ul>
-                <li><label>Title<input type="text" name="title"/></label></li>
-                <li><label>Author<input type="text" name="author"/></label></li>
-                <li><label>Number of pages<input type="number" name="number-of-pages"/></label></li>
-                <li><label>Finished reading?<input type="checkbox" name="finished-reading"/></label></li>
-                <li><button type="button" class="add-book">ADD BOOK</button></li>
+                <li><label>Title<input type="text" name="title" id="book-title" required/></label></li>
+                <li><label>Author<input type="text" name="author" id="book-author" required/></label></li>
+                <li><label>Number of pages<input type="number" name="number-of-pages" id="book-pages" required/></label></li>
+                <li><label>Finished reading?<input type="checkbox" name="finished-reading" id="book-read"/></label></li>
+                <li><button class="add-book">ADD BOOK</button></li>
             </ul>
         </form>
     </aside>

@@ -4,7 +4,6 @@ const sidebar = document.querySelector("aside");
 const mainbody = document.querySelector("main");
 const sideButton = document.querySelector("button.sidebar");
 const form = document.querySelector("form");
-const addButton = document.querySelector("button.add-book");
 let nextID = 0;
 let formHidden = true;
 
@@ -96,8 +95,18 @@ sideButton.addEventListener("click", () => {
     collapseExpand();
 });
 
-addButton.addEventListener("click", () => {
-    addBookToLibrary(new Book("The Hobbit XYZ", "J.R.R. Tolkien", 2900, false, nextID));
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let title = document.querySelector("#book-title").value;
+    let author = document.querySelector("#book-author").value;
+    let pages = document.querySelector("#book-pages").value;
+    let read = document.querySelector("#book-read").checked;
+
+    bookToAdd = new Book(title, author, pages, read, nextID);
+    addBookToLibrary(bookToAdd);
+
+    form.reset();
 });
 
 function removeBookFromLibrary(book) {
