@@ -6,6 +6,8 @@ const sideButton = document.querySelector("button.sidebar");
 const form = document.querySelector("form");
 let nextID = 0;
 let formHidden = true;
+const markRead = "Read";
+const markUnread = "Unread";
 
 
 function Book(title, author, pages, read, id) {
@@ -41,7 +43,7 @@ function addBookToLibrary(book) {
     let deleteButton = document.createElement("button");
     deleteButton.classList.add("delete");
     deleteButton.setAttribute("type", "button");
-    deleteButton.textContent = "Del";
+    deleteButton.textContent = "Delete";
     myBook.appendChild(deleteButton);
     deleteButton.addEventListener("click", (e) => {
         let parent = e.target.parentNode;
@@ -55,7 +57,7 @@ function addBookToLibrary(book) {
     let toggleButton = document.createElement("button");
     toggleButton.classList.add("toggle");
     toggleButton.setAttribute("type", "button");
-    toggleButton.textContent = "Read";
+    toggleButton.textContent = markRead;
     myBook.appendChild(toggleButton);
     toggleButton.addEventListener("click", (e) => {
         let parent = e.target.parentNode;
@@ -64,6 +66,7 @@ function addBookToLibrary(book) {
         
         let updatedText = targetBook.info();
         parent.firstChild.textContent = updatedText;
+        toggleButtonText(e.target)
     });
 
     mainbody.appendChild(myBook);
@@ -114,10 +117,15 @@ function removeBookFromLibrary(book) {
 }
 
 function toggleReadStatus(book) {
-    let oldInfo = book.info();
     book.read = !book.read;
-    let newInfo = book.info();
-    alert (`Read status updated.\nBefore: ${oldInfo}\nAfter:    ${newInfo}`);
+}
+
+function toggleButtonText(targetButton) {
+    if (targetButton.textContent == markRead) {
+        targetButton.textContent = markUnread;
+    } else {
+        targetButton.textContent = markRead;
+    }
 }
 
 function getBookByID(targetID) {
