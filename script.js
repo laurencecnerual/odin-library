@@ -44,12 +44,23 @@ function addBookToLibrary(book) {
     deleteButton.setAttribute("type", "button");
     deleteButton.textContent = "Del";
     myBook.appendChild(deleteButton);
+    deleteButton.addEventListener("click", (e) => {
+        let parent = e.target.parentNode;
+        let targetBook = getBookByID(parent.id);
+        if (window.confirm("Are you sure you want to delete the following book?\n" + targetBook.info())) {
+            removeBookFromLibrary(targetBook);
+            parent.remove();
+        } 
+    });
 
     let toggleButton = document.createElement("button");
     toggleButton.classList.add("toggle");
     toggleButton.setAttribute("type", "button");
     toggleButton.textContent = "Read";
     myBook.appendChild(toggleButton);
+    toggleButton.addEventListener("click", (e) => {
+        alert("Tog " + e.target.parentNode.id);
+    });
 
     mainbody.appendChild(myBook);
 }
@@ -92,28 +103,24 @@ function toggleReadStatus(book) {
     book.read *= !book.read;
 }
 
-function displayLibrary() {
-    for (let key in myLibrary) {
-        let singleBook = document.createElement("div");
-        singleBook.classList.add("book");
-        singleBook.setAttribute("id", Number(key) + 1);
-        singleBook.textContent = myLibrary[key].info();
-        mainbody.appendChild(singleBook);
+function getBookByID(targetID) {
+    for (let book of myLibrary) {
+        if (book.id == targetID) {
+            return book;
+        }
     }
 }
+
+// function displayLibrary() {
+//     for (let key in myLibrary) {
+//         let singleBook = document.createElement("div");
+//         singleBook.classList.add("book");
+//         singleBook.setAttribute("id", Number(key) + 1);
+//         singleBook.textContent = myLibrary[key].info();
+//         mainbody.appendChild(singleBook);
+//     }
+// }
 
 for (let i = 1; i < 31; i++) {
     addBookToLibrary(new Book(`The Hobbit ${i}`, "J.R.R. Tolkien", 290 + i, i % 2 ? true : false, nextID));
 }
-
-// for (let key in myLibrary) {
-//     if ((Number(key) + 1) % 3) {
-//         removeBookFromLibrary(myLibrary[key]);
-//     }
-// }
-
-// for (let key in myLibrary) {
-//     if ((Number(key) + 1) % 5) {
-//         toggleReadStatus(myLibrary[key]);
-//     }
-// }
