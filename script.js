@@ -62,6 +62,9 @@ function addBookToLibrary(book) {
         let parent = e.target.parentNode;
         let targetBook = getBookByID(parent.id);
         toggleReadStatus(targetBook);
+        
+        let updatedText = targetBook.info();
+        parent.firstChild.textContent = updatedText;
     });
 
     mainbody.appendChild(myBook);
