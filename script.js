@@ -17,7 +17,7 @@ function Book(title, author, pages, read, id) {
   this.read = read;
   this.id = id;
   this.info = function() {
-    let bookInfo = `[${this.id}] \"${this.title}\" by ${this.author}, ${this.pages} pages, `;
+    let bookInfo = `\"${this.title}\" by ${this.author}, ${this.pages} pages, `;
     if (this.read) {
         bookInfo += "already read"
     } else {
@@ -141,6 +141,7 @@ function getBookByID(targetID) {
     }
 }
 
+// Used to populate the library by default (for testing purposes)
 for (let i = 1; i < 31; i++) {
-    addBookToLibrary(new Book(`The Hobbit ${i}`, "J.R.R. Tolkien", 290 + i, i % 2 ? true : false, nextID));
+    addBookToLibrary(new Book(`The Hobbit ${i}`, "J.R.R. Tolkien", 294 + i, i % 2 ? false : true, nextID));
 }
