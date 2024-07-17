@@ -141,16 +141,6 @@ function getBookByID(targetID) {
     }
 }
 
-// function displayLibrary() {
-//     for (let key in myLibrary) {
-//         let singleBook = document.createElement("div");
-//         singleBook.classList.add("book");
-//         singleBook.setAttribute("id", Number(key) + 1);
-//         singleBook.textContent = myLibrary[key].info();
-//         mainbody.appendChild(singleBook);
-//     }
-// }
-
 for (let i = 1; i < 31; i++) {
     addBookToLibrary(new Book(`The Hobbit ${i}`, "J.R.R. Tolkien", 290 + i, i % 2 ? true : false, nextID));
 }
