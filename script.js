@@ -4,7 +4,7 @@ const sidebar = document.querySelector("aside");
 const mainbody = document.querySelector("main");
 const sideButton = document.querySelector("button.sidebar");
 const form = document.querySelector("form");
-let nextID = 0;
+let nextID = 1;
 let formHidden = true;
 const markRead = "Read";
 const markUnread = "Unread";
@@ -29,17 +29,20 @@ function Book(title, author, pages, read, id) {
 }
 
 function addBookToLibrary(book) {
-    myLibrary.push(book);
+    myLibrary.push(book); // adds the book object to the array of books
 
+    //prepares HTML card representing a book
     let myHTMLBook = document.createElement("div");
     myHTMLBook.classList.add("book");
     myHTMLBook.setAttribute("id", nextID++);
 
+    //prepares the text summary part of the book card
     let bookInfo = document.createElement("div");
     bookInfo.classList.add("book-info");
-    bookInfo.textContent = myLibrary[myLibrary.length - 1].info();
+    bookInfo.textContent = book.info();
     myHTMLBook.appendChild(bookInfo);
 
+    //prepares the delete button part of the book card
     let deleteButton = document.createElement("button");
     deleteButton.classList.add("delete");
     deleteButton.setAttribute("type", "button");
@@ -49,27 +52,23 @@ function addBookToLibrary(book) {
         let parent = e.target.parentNode;
         let targetBook = getBookByID(parent.id);
         if (window.confirm("Are you sure you want to delete the following book?\n" + targetBook.info())) {
-            removeBookFromLibrary(targetBook);
-            parent.remove();
+            removeBookFromLibrary(targetBook, parent);
         } 
     });
 
+    //prepares the Read/Unread button part of the book card
     let toggleButton = document.createElement("button");
     toggleButton.classList.add("toggle");
     toggleButton.setAttribute("type", "button");
-    setReadButtonLabel(toggleButton, book);
+    setReadButtonLabel(book, toggleButton);
     myHTMLBook.appendChild(toggleButton);
     toggleButton.addEventListener("click", (e) => {
-        let parent = e.target.parentNode;
-        let targetBook = getBookByID(parent.id);
-        toggleReadStatus(targetBook);
-        
-        let updatedText = targetBook.info();
-        parent.firstChild.textContent = updatedText;
-        setReadButtonLabel(e.target, targetBook);
+        let targetButton = e.target;
+        let targetBook = getBookByID(targetButton.parentNode.id);
+        toggleReadStatus(targetBook, targetButton);
     });
 
-    mainbody.appendChild(myHTMLBook);
+    mainbody.appendChild(myHTMLBook); // adds the book card with all of its content to the screen
 }
 
 function displayForm() {
@@ -112,19 +111,25 @@ form.addEventListener("submit", (e) => {
     form.reset();
 });
 
-function removeBookFromLibrary(book) {
+function removeBookFromLibrary(book, htmlBook) {
     myLibrary.pop(book);
+    htmlBook.remove();
 }
 
-function toggleReadStatus(book) {
+function toggleReadStatus(book, button) {
     book.read = !book.read;
+
+    let updatedText = book.info();
+    button.parentNode.firstChild.textContent = updatedText;
+
+    setReadButtonLabel(book, button);
 }
 
-function setReadButtonLabel(targetButton, book) {
+function setReadButtonLabel(book, button) {
     if (book.read) {
-        targetButton.textContent = markUnread;
+        button.textContent = markUnread;
     } else {
-        targetButton.textContent = markRead;
+        button.textContent = markRead;
     }
 }
 
