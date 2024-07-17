@@ -31,20 +31,20 @@ function Book(title, author, pages, read, id) {
 function addBookToLibrary(book) {
     myLibrary.push(book);
 
-    let myBook = document.createElement("div");
-    myBook.classList.add("book");
-    myBook.setAttribute("id", nextID++);
+    let myHTMLBook = document.createElement("div");
+    myHTMLBook.classList.add("book");
+    myHTMLBook.setAttribute("id", nextID++);
 
     let bookInfo = document.createElement("div");
     bookInfo.classList.add("book-info");
     bookInfo.textContent = myLibrary[myLibrary.length - 1].info();
-    myBook.appendChild(bookInfo);
+    myHTMLBook.appendChild(bookInfo);
 
     let deleteButton = document.createElement("button");
     deleteButton.classList.add("delete");
     deleteButton.setAttribute("type", "button");
     deleteButton.textContent = "Delete";
-    myBook.appendChild(deleteButton);
+    myHTMLBook.appendChild(deleteButton);
     deleteButton.addEventListener("click", (e) => {
         let parent = e.target.parentNode;
         let targetBook = getBookByID(parent.id);
@@ -57,8 +57,8 @@ function addBookToLibrary(book) {
     let toggleButton = document.createElement("button");
     toggleButton.classList.add("toggle");
     toggleButton.setAttribute("type", "button");
-    toggleButton.textContent = markRead;
-    myBook.appendChild(toggleButton);
+    setReadButtonLabel(toggleButton, book);
+    myHTMLBook.appendChild(toggleButton);
     toggleButton.addEventListener("click", (e) => {
         let parent = e.target.parentNode;
         let targetBook = getBookByID(parent.id);
@@ -66,10 +66,10 @@ function addBookToLibrary(book) {
         
         let updatedText = targetBook.info();
         parent.firstChild.textContent = updatedText;
-        toggleButtonText(e.target)
+        setReadButtonLabel(e.target, targetBook);
     });
 
-    mainbody.appendChild(myBook);
+    mainbody.appendChild(myHTMLBook);
 }
 
 function displayForm() {
@@ -120,8 +120,8 @@ function toggleReadStatus(book) {
     book.read = !book.read;
 }
 
-function toggleButtonText(targetButton) {
-    if (targetButton.textContent == markRead) {
+function setReadButtonLabel(targetButton, book) {
+    if (book.read) {
         targetButton.textContent = markUnread;
     } else {
         targetButton.textContent = markRead;
