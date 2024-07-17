@@ -3,6 +3,8 @@ body {
     display: grid;
     grid-template-columns: 1fr 99fr;
     height: 100vh;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 0.95rem;
 }
 
 aside {
@@ -20,15 +22,42 @@ ul {
     gap: 25px;
   }
 
-  li.form-field-with-grid {
+li.form-field-with-grid {
     display: grid;
-  }
+    margin: 0 3px;
+    gap: 3px;
+}
   
-  li.form-field-with-flex {
+li.form-field-with-flex {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+    gap: 5px;
+}
+
+input.text-like-field {
+    border-radius: 3px;
+    border: 1px solid gray;
+    outline: none;
+    padding: 3px 3px;
+}
+
+input.text-like-field:focus {
+    outline: 1px solid indigo;
+}
+
+input#book-read {
+    height: 20px;
+    width: 20px;
+}
+
+input#book-read:checked {
+    accent-color: black;
+}
+
+label {
+    font-size: 1.1rem;
+}
 
 main {
     display: grid;
