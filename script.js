@@ -9,25 +9,6 @@ let formHidden = true;
 const markRead = "Read";
 const markUnread = "Unread";
 
-
-function Book(title, author, pages, read, id) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.id = id;
-  this.info = function() {
-    let bookInfo = `\"${this.title}\" by ${this.author}, ${this.pages} pages, `;
-    if (this.read) {
-        bookInfo += "already read"
-    } else {
-        bookInfo += "not read yet"
-    }
-
-    return bookInfo; // Expected example: "The Hobbit" by J.R.R. Tolkien, 295 pages, not read yet
-  };
-}
-
 function addBookToLibrary(book) {
     myLibrary.push(book); // adds the book object to the array of books
 
